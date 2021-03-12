@@ -1,0 +1,31 @@
+@font-face {
+	font-family: "icons";
+	font-display: swap;
+	src: url("../fonts/icons.woff") format("woff"), url("../fonts/icons.woff2#icons") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+%ic {
+	font-family: "icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+[class^="_icon-"],
+[class*=" _icon-"] {
+	&:before {
+		@extend %ic;
+		display: block;
+	}
+}
+
+._icon-f:before { content: "\EA01"; }
+._icon-feather_edit:before { content: "\EA02"; }
+._icon-Group 18:before { content: "\EA03"; }
+._icon-Group 70:before { content: "\EA04"; }

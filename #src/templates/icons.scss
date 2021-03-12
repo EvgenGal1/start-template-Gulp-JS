@@ -1,0 +1,29 @@
+@font-face {
+	font-family: "icons";
+	font-display: swap;
+	src: url("../fonts/icons.woff") format("woff"), url("../fonts/icons.woff2#icons") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+%ic {
+	font-family: "icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+[class^="_icon-"],
+[class*=" _icon-"] {
+	&:before {
+		@extend %ic;
+		display: block;
+	}
+}
+
+<% _.each(glyphs, function(glyph) { %>.<%= className %>-<%= glyph.name %>:before { content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"; }
+<% }); %>

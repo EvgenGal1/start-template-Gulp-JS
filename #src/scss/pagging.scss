@@ -1,0 +1,19 @@
+.pagging {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	// .pagging__arrow
+	&__arrow {
+	}
+	// .pagging__list
+	&__list {
+		display: flex;
+		li {
+		}
+	}
+	// .pagging__item
+	&__item {
+		&._active {
+		}
+	}
+}
