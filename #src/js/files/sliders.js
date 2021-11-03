@@ -40,6 +40,8 @@ if (sliderScrollItems.length > 0) {
 		const sliderScrollItem = sliderScrollItems[index];
 		const sliderScrollBar = sliderScrollItem.querySelector('.swiper-scrollbar');
 		const sliderScroll = new Swiper(sliderScrollItem, {
+			observer: true,
+			observeParents: true,
 			direction: 'vertical',
 			slidesPerView: 'auto',
 			freeMode: true,
@@ -59,7 +61,7 @@ if (sliderScrollItems.length > 0) {
 
 function sliders_bild_callback(params) { }
 
-let sliderSlider = new Swiper('.slider', {
+let slider_about = new Swiper('.about__slider', {
 	/*
 	effect: 'fade',
 	autoplay: {

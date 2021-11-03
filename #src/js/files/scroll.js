@@ -9,11 +9,12 @@ let scrolling_full = true;
 
 let scrollDirection = 0;
 
+let currentScroll;
+
 //ScrollOnScroll
 window.addEventListener('scroll', scroll_scroll);
 function scroll_scroll() {
-	//scr_body.setAttribute('data-scroll', pageYOffset);
-	let src_value = pageYOffset;
+	let src_value = currentScroll = pageYOffset;
 	let header = document.querySelector('header.header');
 	if (header !== null) {
 		if (src_value > 10) {
@@ -27,6 +28,13 @@ function scroll_scroll() {
 			let block = scr_blocks[index];
 			let block_offset = offset(block).top;
 			let block_height = block.offsetHeight;
+
+			/*
+			if ((src_value > block_offset - block_height) && src_value < (block_offset + block_height) && window.innerHeight > scr_min_height && window.innerWidth > 992) {
+				let scrProcent = (src_value - block_offset) / block_height * 100;
+				scrParallax(block, scrProcent, block_height);
+			}
+			*/
 
 			if ((pageYOffset > block_offset - window.innerHeight / 1.5) && pageYOffset < (block_offset + block_height) - window.innerHeight / 5) {
 				block.classList.add('_scr-sector_active');
@@ -71,7 +79,6 @@ function scroll_scroll() {
 			}
 		}
 	}
-
 	if (scr_fix_block.length > 0) {
 		fix_block(scr_fix_block, src_value);
 	}
@@ -83,7 +90,6 @@ function scroll_scroll() {
 		let custom_scroll_line_height = custom_scroll_line.offsetHeight;
 		custom_scroll_line.style.transform = "translateY(" + (window_height - custom_scroll_line_height) / 100 * scr_procent + "px)";
 	}
-
 	if (src_value > scrollDirection) {
 		// downscroll code
 	} else {
@@ -97,6 +103,7 @@ setTimeout(function () {
 }, 100);
 
 function scroll_lazy(scr_item) {
+	/*
 	let lazy_src = scr_item.querySelectorAll('*[data-src]');
 	if (lazy_src.length > 0) {
 		for (let index = 0; index < lazy_src.length; index++) {
@@ -117,8 +124,24 @@ function scroll_lazy(scr_item) {
 			}
 		}
 	}
-}
+	*/
+	/*
+	window.onload = () => {
+		const observer = new IntersectionObserver((entries, observer) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					console.log(entry)
+					// ссылка на оригинальное изображение хранится в атрибуте "data-src"
+					entry.target.src = entry.target.dataset.src
+					observer.unobserve(entry.target)
+				}
+			})
+		}, { threshold: 0.5 })
 
+		document.querySelectorAll('img').forEach(img => observer.observe(img))
+	}
+	*/
+}
 function scroll_load_item(scr_item) {
 	if (scr_item.classList.contains('_load-map') && !scr_item.classList.contains('_loaded-map')) {
 		let map_item = document.getElementById('map');
@@ -128,56 +151,82 @@ function scroll_load_item(scr_item) {
 		}
 	}
 }
-
+function scrParallax(block, scrProcent, blockHeight) {
+	let prlxItems = block.querySelectorAll('._prlx-item');
+	if (prlxItems.length > 0) {
+		for (let index = 0; index < prlxItems.length; index++) {
+			const prlxItem = prlxItems[index];
+			let prlxItemAttr = (prlxItem.dataset.prlx) ? prlxItem.dataset.prlx : 3;
+			const prlxItemValue = -1 * (blockHeight / 100 * scrProcent / prlxItemAttr);
+			prlxItem.style.cssText = `transform: translateY(${prlxItemValue}px);`;
+		}
+	}
+}
 //FullScreenScroll
 if (scr_blocks.length > 0 && !isMobile.any()) {
 	disableScroll();
 	window.addEventListener('wheel', full_scroll);
+
+	let swiperScrolls = document.querySelectorAll('._swiper_scroll');
+
+	if (swiperScrolls.length > 0) {
+		for (let index = 0; index < swiperScrolls.length; index++) {
+			const swiperScroll = swiperScrolls[index];
+			swiperScroll.addEventListener("mouseenter", function (e) {
+				window.removeEventListener('wheel', full_scroll);
+			});
+			swiperScroll.addEventListener("mouseleave", function (e) {
+				window.addEventListener('wheel', full_scroll);
+			});
+		}
+	}
+}
+function getPrevBlockPos(current_block_prev) {
+	let viewport_height = window.innerHeight;
+	let current_block_prev_height = current_block_prev.offsetHeight;
+	let block_pos = offset(current_block_prev).top;
+
+	if (current_block_prev_height >= viewport_height) {
+		block_pos = block_pos + (current_block_prev_height - viewport_height);
+	}
+	return block_pos;
 }
 function full_scroll(e) {
 	let viewport_height = window.innerHeight;
 	if (viewport_height >= scr_min_height) {
 		if (scrolling_full) {
-			// ВЫЧИСЛИТЬ!!!
-			let current_scroll = pageYOffset;//parseInt(scr_body.getAttribute('data-scroll'));
-			//
 			let current_block = document.querySelector('._scr-sector._scr-sector_current');
 			let current_block_pos = offset(current_block).top;
 			let current_block_height = current_block.offsetHeight;
 			let current_block_next = current_block.nextElementSibling;
 			let current_block_prev = current_block.previousElementSibling;
-			let block_pos;
 			if (e.keyCode == 40 || e.keyCode == 34 || e.deltaX > 0 || e.deltaY < 0) {
-				if (current_block_prev) {
-					let current_block_prev_height = current_block_prev.offsetHeight;
-					block_pos = offset(current_block_prev).top;
-					if (current_block_height <= viewport_height) {
-						if (current_block_prev_height >= viewport_height) {
-							block_pos = block_pos + (current_block_prev_height - viewport_height);
-							full_scroll_to_sector(block_pos);
-						}
-					} else {
-						enableScroll();
-						if (current_scroll <= current_block_pos) {
-							full_scroll_to_sector(block_pos);
-						}
+				if (current_block_height <= viewport_height) {
+					if (current_block_prev) {
+						full_scroll_to_sector(getPrevBlockPos(current_block_prev));
 					}
 				} else {
-					full_scroll_pagestart();
+					enableScroll();
+					if (currentScroll <= current_block_pos) {
+						if (current_block_prev) {
+							full_scroll_to_sector(getPrevBlockPos(current_block_prev));
+						}
+					}
 				}
 			} else if (e.keyCode == 38 || e.keyCode == 33 || e.deltaX < 0 || e.deltaY > 0) {
-				if (current_block_next) {
-					block_pos = offset(current_block_next).top;
-					if (current_block_height <= viewport_height) {
+				if (current_block_height <= viewport_height) {
+					if (current_block_next) {
+						let block_pos = offset(current_block_next).top;
 						full_scroll_to_sector(block_pos);
-					} else {
-						enableScroll();
-						if (current_scroll >= block_pos - viewport_height) {
+					}
+				} else {
+					enableScroll();
+					if (current_block_next) {
+						let block_pos = offset(current_block_next).top;
+						if (currentScroll >= block_pos - viewport_height) {
 							full_scroll_to_sector(block_pos);
 						}
 					}
-				} else {
-					full_scroll_pageend();
 				}
 			}
 		} else {

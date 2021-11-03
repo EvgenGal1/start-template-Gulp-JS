@@ -1,42 +1,4 @@
 //====================================================================================================
-.header {
-	background-color: #fff;
-	position: fixed;
-	width: 100%;
-	top: 0;
-	padding: 20px;
-	z-index: 50;
-	// .header__content
-	&__content {
-	}
-	// .header__menu
-	&__menu {
-	}
-}
-.menu {
-	// .menu__icon
-	&__icon {
-	}
-	// .menu__body
-	&__body {
-	}
-	// .menu__list
-	&__list {
-		display: flex;
-		li {
-			margin: 0px 15px 0px 0px;
-		}
-	}
-	// .menu__link
-	&__link {
-		color: #000;
-		&._active {
-			color: red;
-		}
-	}
-}
-.icon-menu {
-}
 
 //====================================================================================================
 

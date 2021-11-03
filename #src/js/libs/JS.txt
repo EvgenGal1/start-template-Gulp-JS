@@ -1,0 +1,11 @@
+@@include('files/map.js')
+@@include('files/sliders.js')
+@@include('files/scroll.js')
+@@include('files/fullscroll.js')
+@@include('files/responsive.js')
+
+<script src="https://maps.google.com/maps/api/js?sensor=false&amp;key=AIzaSyAe2qamce_RVw-APqN7EqsaGZ2Cm5Zciss"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false&amp;key="></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=88450800-c3cf-4124-9321-04e971d0c3d8&lang=ru_RU" type="text/javascript"></script>
+
+<!-- async -->

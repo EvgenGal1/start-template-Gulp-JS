@@ -12,11 +12,11 @@
 }
 :focus,
 :active {
-	outline: none;
+	// outline: none;
 }
 a:focus,
 a:active {
-	outline: none;
+	// outline: none;
 }
 aside,
 nav,
@@ -24,6 +24,9 @@ footer,
 header,
 section {
 	display: block;
+}
+html {
+	font-size: #{$fontSize + px};
 }
 html,
 body {
@@ -42,12 +45,14 @@ input,
 button,
 textarea {
 	font-family: $fontFamily;
+	font-size: inherit;
 }
 input::-ms-clear {
 	display: none;
 }
 button {
 	cursor: pointer;
+	background-color: inherit;
 }
 button::-moz-focus-inner {
 	padding: 0;
@@ -76,4 +81,8 @@ h6 {
 	font-size: inherit;
 }
 //-webkit-overflow-scrolling: touch;
-//animation-play-state: paused !important;
+/*
+&::-webkit-scrollbar {
+	display: none;
+}
+*/

@@ -29,13 +29,21 @@ async function form_submit(e) {
 				let result = await response.json();
 				form.classList.remove('_sending');
 				if (message) {
-					popup_open('_' + message + '-message');
+					popup_open(message + '-message');
 				}
 				form_clean(form);
 			} else {
 				alert("Ошибка");
 				form.classList.remove('_sending');
 			}
+		}
+		// If test
+		if (form.hasAttribute('data-test')) {
+			e.preventDefault();
+			if (message) {
+				popup_open(message + '-message');
+			}
+			form_clean(form);
 		}
 	} else {
 		let form_error = form.querySelectorAll('._error');
@@ -134,7 +142,8 @@ function form_clean(form) {
 	}
 }
 
-let viewPass = document.querySelectorAll('.form__viewpass');
+//viewPass
+let viewPass = document.querySelectorAll('._viewpass');
 for (let index = 0; index < viewPass.length; index++) {
 	const element = viewPass[index];
 	element.addEventListener("click", function (e) {
@@ -146,7 +155,6 @@ for (let index = 0; index < viewPass.length; index++) {
 		element.classList.toggle('_active');
 	});
 }
-
 
 //Select
 let selects = document.getElementsByTagName('select');
@@ -170,7 +178,7 @@ function selects_init() {
 }
 function selects_close(e) {
 	const selects = document.querySelectorAll('.select');
-	if (!e.target.closest('.select')) {
+	if (!e.target.closest('.select') && !e.target.classList.contains('_option')) {
 		for (let index = 0; index < selects.length; index++) {
 			const select = selects[index];
 			const select_body_options = select.querySelector('.select__options');
@@ -214,32 +222,53 @@ function select_item(select) {
 	select_parent.insertAdjacentHTML('beforeend',
 		'<div class="select__item">' +
 		'<div class="select__title">' + select_type_content + '</div>' +
-		'<div class="select__options">' + select_get_options(select_options) + '</div>' +
+		'<div hidden class="select__options">' + select_get_options(select_options) + '</div>' +
 		'</div></div>');
 
 	select_actions(select, select_parent);
 }
 function select_actions(original, select) {
 	const select_item = select.querySelector('.select__item');
+	const selectTitle = select.querySelector('.select__title');
 	const select_body_options = select.querySelector('.select__options');
 	const select_options = select.querySelectorAll('.select__option');
 	const select_type = original.getAttribute('data-type');
 	const select_input = select.querySelector('.select__input');
 
-	select_item.addEventListener('click', function () {
-		let selects = document.querySelectorAll('.select');
-		for (let index = 0; index < selects.length; index++) {
-			const select = selects[index];
-			const select_body_options = select.querySelector('.select__options');
-			if (select != select_item.closest('.select')) {
-				select.classList.remove('_active');
-				_slideUp(select_body_options, 100);
-			}
-		}
-		_slideToggle(select_body_options, 100);
-		select.classList.toggle('_active');
+	selectTitle.addEventListener('click', function (e) {
+		selectItemActions();
 	});
 
+	function selectMultiItems() {
+		let selectedOptions = select.querySelectorAll('.select__option');
+		let originalOptions = original.querySelectorAll('option');
+		let selectedOptionsText = [];
+		for (let index = 0; index < selectedOptions.length; index++) {
+			const selectedOption = selectedOptions[index];
+			originalOptions[index].removeAttribute('selected');
+			if (selectedOption.classList.contains('_selected')) {
+				const selectOptionText = selectedOption.innerHTML;
+				selectedOptionsText.push(selectOptionText);
+				originalOptions[index].setAttribute('selected', 'selected');
+			}
+		}
+		select.querySelector('.select__value').innerHTML = '<span>' + selectedOptionsText + '</span>';
+	}
+	function selectItemActions(type) {
+		if (!type) {
+			let selects = document.querySelectorAll('.select');
+			for (let index = 0; index < selects.length; index++) {
+				const select = selects[index];
+				const select_body_options = select.querySelector('.select__options');
+				if (select != select_item.closest('.select')) {
+					select.classList.remove('_active');
+					_slideUp(select_body_options, 100);
+				}
+			}
+			_slideToggle(select_body_options, 100);
+			select.classList.toggle('_active');
+		}
+	}
 	for (let index = 0; index < select_options.length; index++) {
 		const select_option = select_options[index];
 		const select_option_value = select_option.getAttribute('data-value');
@@ -248,7 +277,7 @@ function select_actions(original, select) {
 		if (select_type == 'input') {
 			select_input.addEventListener('keyup', select_search);
 		} else {
-			if (select_option.getAttribute('data-value') == original.value) {
+			if (select_option.getAttribute('data-value') == original.value && !original.hasAttribute('multiple')) {
 				select_option.style.display = 'none';
 			}
 		}
@@ -261,10 +290,20 @@ function select_actions(original, select) {
 				select_input.value = select_option_text;
 				original.value = select_option_value;
 			} else {
-				select.querySelector('.select__value').innerHTML = '<span>' + select_option_text + '</span>';
-				original.value = select_option_value;
-				select_option.style.display = 'none';
+				if (original.hasAttribute('multiple')) {
+					select_option.classList.toggle('_selected');
+					selectMultiItems();
+				} else {
+					select.querySelector('.select__value').innerHTML = '<span>' + select_option_text + '</span>';
+					original.value = select_option_value;
+					select_option.style.display = 'none';
+				}
 			}
+			let type;
+			if (original.hasAttribute('multiple')) {
+				type = 'multiple';
+			}
+			selectItemActions(type);
 		});
 	}
 }
@@ -275,7 +314,7 @@ function select_get_options(select_options) {
 			const select_option = select_options[index];
 			const select_option_value = select_option.value;
 			if (select_option_value != '') {
-				const select_option_text = select_option.text;
+				const select_option_text = select_option.innerHTML;
 				select_options_content = select_options_content + '<div data-value="' + select_option_value + '" class="select__option">' + select_option_text + '</div>';
 			}
 		}
@@ -326,7 +365,13 @@ function inputs_init(inputs) {
 					input.value = '';
 				}
 				if (input.getAttribute('data-type') === "pass") {
-					input.setAttribute('type', 'password');
+					if (input.parentElement.querySelector('._viewpass')) {
+						if (!input.parentElement.querySelector('._viewpass').classList.contains('_active')) {
+							input.setAttribute('type', 'password');
+						}
+					} else {
+						input.setAttribute('type', 'password');
+					}
 				}
 				if (input.classList.contains('_date')) {
 					/*
@@ -381,9 +426,12 @@ function inputs_init(inputs) {
 				}
 			});
 			if (input.classList.contains('_date')) {
-				datepicker(input, {
-					customDays: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+				const calendarItem = datepicker(input, {
+					customDays: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
 					customMonths: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+					overlayButton: 'Применить',
+					overlayPlaceholder: 'Год (4 цифры)',
+					startDay: 1,
 					formatter: (input, date, instance) => {
 						const value = date.toLocaleDateString()
 						input.value = value
@@ -392,6 +440,14 @@ function inputs_init(inputs) {
 						input_focus_add(input.el);
 					}
 				});
+				const dataFrom = input.getAttribute('data-from');
+				const dataTo = input.getAttribute('data-to');
+				if (dataFrom) {
+					calendarItem.setMin(new Date(dataFrom));
+				}
+				if (dataTo) {
+					calendarItem.setMax(new Date(dataTo));
+				}
 			}
 		}
 	}
@@ -437,22 +493,28 @@ if (quantityButtons.length > 0) {
 }
 
 //RANGE
-const priceSlider = document.querySelector('.price__range');
+const priceSlider = document.querySelector('.price-filter__slider');
 if (priceSlider) {
+
+	let textFrom = priceSlider.getAttribute('data-from');
+	let textTo = priceSlider.getAttribute('data-to');
+
 	noUiSlider.create(priceSlider, {
 		start: [0, 200000],
 		connect: true,
-		tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+		tooltips: [wNumb({ decimals: 0, prefix: textFrom + ' ' }), wNumb({ decimals: 0, prefix: textTo + ' ' })],
 		range: {
 			'min': [0],
 			'max': [200000]
 		}
 	});
 
+	/*
 	const priceStart = document.getElementById('price-start');
 	const priceEnd = document.getElementById('price-end');
 	priceStart.addEventListener('change', setPriceValues);
 	priceEnd.addEventListener('change', setPriceValues);
+	*/
 
 	function setPriceValues() {
 		let priceStartValue;

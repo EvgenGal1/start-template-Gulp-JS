@@ -1,4 +1,11 @@
-function map(n) {
+
+function mapAdd() {
+	let tag = document.createElement('script');
+	tag.src = "https://maps.google.com/maps/api/js?sensor=false&amp;key=&callback=mapInit";
+	let firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+function mapInit(n = 1) {
 	google.maps.Map.prototype.setCenterWithOffset = function (latlng, offsetX, offsetY) {
 		var map = this;
 		var ov = new google.maps.OverlayView();
@@ -50,18 +57,17 @@ function map(n) {
 					markers[m].setIcon(icon);
 				}
 				var cnt = i + 1;
-				//infowindow.setContent($('.contacts-map-item_' + cnt).html());
-				infowindow.open(map, marker);
+				//infowindow.setContent(document.querySelector('.events-map__item_' + cnt).innerHTML);
+				//infowindow.open(map, marker);
 				marker.setIcon(icon);
 				map.setCenterWithOffset(marker.getPosition(), 0, 0);
 				setTimeout(function () {
-					baloonstyle();
+
 				}, 10);
 			}
 		})(marker, i));
 		markers.push(marker);
 	}
-
 	if (n) {
 		var nc = n - 1;
 		setTimeout(function () {
@@ -69,8 +75,9 @@ function map(n) {
 		}, 500);
 	}
 }
-
-//map(1);
+if (document.querySelector('#map')) {
+	mapAdd();
+}
 
 
 /* YA

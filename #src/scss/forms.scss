@@ -17,10 +17,10 @@
 //</FORM>====================================================================================================
 
 //<BUTTONS (a.btn+tab)>====================================================================================================
-.btn {
+.button {
 	display: inline-flex;
 	padding: 0px 0px;
-	@media (min-width: 992px) {
+	@media (any-hover: hover) {
 		&:hover {
 		}
 	}
@@ -33,7 +33,6 @@
 //<SELECT (sel+tab)>====================================================================================================
 .select {
 	position: relative;
-	line-height: 1;
 	// .select__item
 	&__item {
 		position: relative;
@@ -82,7 +81,6 @@
 	// .select__options
 	&__options {
 		color: #000;
-		display: none;
 		position: absolute;
 		top: 29px;
 		border-radius: 0 0 4px 4px;
@@ -131,18 +129,18 @@ textarea {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+	&:focus {
+		outline: none;
+	}
 }
 .input {
 	border-radius: 0 !important;
 	width: 100%;
 	display: block;
 	padding: 0px 20px;
-	font-size: 20px;
-	height: 50px;
 	&._focus {
 	}
 	&._error {
-		border: 2px solid red;
 	}
 }
 textarea.input {
@@ -273,51 +271,63 @@ textarea.input {
 //</OPTIONS>====================================================================================================
 
 //<RATING>====================================================================================================
-.rating-block {
-	display: table;
-	font-size: 0;
-}
 .rating {
-	display: inline-block;
+	display: flex;
+	align-items: flex-end;
+	font-size: 40px;
+	line-height: 0.75;
+	transition: opacity 0.3s ease 0s;
+}
+.rating.rating_sending {
+	opacity: 0.2;
+}
+.rating.rating_set .rating__active,
+.rating.rating_set .rating__item {
+	cursor: pointer;
+}
+
+.rating__body {
 	position: relative;
-	vertical-align: middle;
-	&.edit .star {
-		cursor: pointer;
-	}
-	.star {
-		width: 17px;
-		height: 14px;
-		display: inline-block;
-		position: relative;
-		z-index: 3;
-	}
 }
-.rating__line {
+.rating__body::before {
+	content: "★★★★★";
+	display: block;
+}
+.rating__active {
 	position: absolute;
-	width: 85px;
-	height: 14px;
+	width: 0%;
+	height: 100%;
 	top: 0;
 	left: 0;
-	background: url("../img/icons/bg_rating.svg") 0 0 no-repeat;
-	z-index: 1;
-	background-size: 85px 100%;
+	overflow: hidden;
 }
-.rating__activeline {
+.rating__active::before {
+	content: "★★★★★";
 	position: absolute;
-	width: 0px;
-	height: 14px;
+	width: 100%;
+	height: 100%;
 	top: 0;
 	left: 0;
-	background: url("../img/icons/bg_rating_active.svg") 0 0 no-repeat;
-	z-index: 2;
-	background-size: 85px 100%;
+	color: #ffd300;
+}
+
+.rating__items {
+	display: flex;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.rating__item {
+	flex: 0 0 20%;
+	height: 100%;
+	opacity: 0;
 }
 .rating__value {
-	display: inline-block;
-	color: #1b3139;
-	font-size: 14px;
-	line-height: 13px;
-	vertical-align: middle;
+	font-size: 50%;
+	line-height: 1;
+	padding: 0px 0px 0px 10px;
 }
 //</RATING>====================================================================================================
 
