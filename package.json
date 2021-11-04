@@ -1,33 +1,45 @@
 {
-	"name": "fls_start_gulp",
-	"version": "1.0.0",
-	"description": "Start template with Gulp",
-	"author": "FLS",
-	"private": true,
-	"license": "GNU General Public License (GPL)",
-	"devDependencies": {
-		"browser-sync": "latest",
-		"del": "latest",
-		"gulp": "latest",
-		"gulp-autoprefixer": "latest",
-		"gulp-clean-css": "latest",
-		"gulp-file-include": "latest",
-		"gulp-fonter": "latest",
-		"gulp-group-css-media-queries": "latest",
-		"gulp-sass": "latest",
-		"sass": "latest",
-		"gulp-uglify-es": "latest",
-		"gulp-version-number": "latest",
-		"gulp-webp-html": "latest",
-		"gulp-webpcss": "latest",
-		"imagemin-webp": "latest",
-		"transform-runtime": "0.0.0",
-		"webp-converter": "2.2.3",
-		"gulp-imagemin": "7.1.0",
-		"gulp-newer": "latest",
-		"gulp-plumber": "latest",
-		"gulp-rename": "latest",
-		"gulp-ttf2woff2": "latest",
-		"gulp-ttf2woff": "latest"
-	}
+  "name": "gulp_js",
+  "version": "1.0.1",
+  "description": "Start template with Gulp",
+  "author": "EvGen Gal",
+  "private": true,
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "del": "latest",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "latest",
+    "gulp-clean-css": "latest",
+    "gulp-file-include": "latest",
+    "gulp-fonter": "latest",
+    "gulp-group-css-media-queries": "latest",
+    "gulp-imagemin": "7.1.0",
+    "gulp-newer": "latest",
+    "gulp-plumber": "latest",
+    "gulp-rename": "latest",
+    "gulp-sass": "latest",
+    "gulp-ttf2woff": "latest",
+    "gulp-ttf2woff2": "latest",
+    "gulp-uglify-es": "latest",
+    "gulp-version-number": "latest",
+    "gulp-webp-html": "latest",
+    "gulp-webpcss": "latest",
+    "imagemin-webp": "latest",
+    "sass": "latest",
+    "transform-runtime": "0.0.0",
+    "webp-converter": "2.2.3"
+  },
+  "main": "Шаблон Gulp + JS",
+  "scripts": {
+    "test": "index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvgenGal1/start-template-Gulp-JS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EvgenGal1/start-template-Gulp-JS/issues"
+  },
+  "homepage": "https://github.com/EvgenGal1/start-template-Gulp-JS#readme"
 }
