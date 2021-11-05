@@ -1,5 +1,5 @@
 // //let replace = require('gulp-replace'); //.pipe(replace('bar', 'foo'))
-// перем src и dest к котор присвоен gulp 
+// перем src и dest к котор присвоен gulp
 let { src, dest } = require("gulp");
 // let fs = require('fs');
 // для отдельных задач
@@ -14,7 +14,7 @@ let browsersync = require("browser-sync").create();
 // let imagemin = require("gulp-imagemin");
 // let uglify = require("gulp-uglify-es").default;
 // let rename = require("gulp-rename");
-// let fileinclude = require("gulp-file-include");
+let fileinclude = require("gulp-file-include");
 // let clean_css = require("gulp-clean-css");
 // let newer = require('gulp-newer');
 
@@ -38,36 +38,39 @@ let src_folder = "#src";
 // перем. path содер. объ. с путями к файлам и папкам
 let path = {
   // пути Про
-	build: {
-		html: project_name + "/",
-		js: project_name + "/js/",
-		css: project_name + "/css/",
-		images: project_name + "/img/",
-		fonts: project_name + "/fonts/",
-		json: project_name + "/json/"
-	},
+  build: {
+    html: project_name + "/",
+    js: project_name + "/js/",
+    css: project_name + "/css/",
+    images: project_name + "/img/",
+    fonts: project_name + "/fonts/",
+    json: project_name + "/json/",
+  },
   // пути Исход
-	src: {
-		favicon: src_folder + "/img/favicon.{jpg,png,svg,gif,ico,webp}",
+  src: {
+    favicon: src_folder + "/img/favicon.{jpg,png,svg,gif,ico,webp}",
     // во всех подпапках берём файлы .html, кроме начин. на _ (нижнее подчёркивание)
-		html: [src_folder + "/**/*.html", "!" + src_folder + "/_*.html"],
-		js: [src_folder + "/js/app.js", src_folder + "/js/vendors.js"],
-		css: src_folder + "/scss/style.scss",
+    html: [src_folder + "/**/*.html", "!" + src_folder + "/_*.html"],
+    js: [src_folder + "/js/app.js", src_folder + "/js/vendors.js"],
+    css: src_folder + "/scss/style.scss",
     // во всех подпапках img берём файлы с опред. расширен., кроме favicon
-		images: [src_folder + "/img/**/*.{jpg,jpeg,png,svg,gif,ico,webp}", "!**/favicon.*"],
-		fonts: src_folder + "/fonts/*.ttf",
-		json: src_folder + "/json/**/*.*"
-	},
+    images: [
+      src_folder + "/img/**/*.{jpg,jpeg,png,svg,gif,ico,webp}",
+      "!**/favicon.*",
+    ],
+    fonts: src_folder + "/fonts/*.ttf",
+    json: src_folder + "/json/**/*.*",
+  },
   // пути к постояно прослушиваемым файлам
-	watch: {
-		html: src_folder + "/**/*.html",
-		js: src_folder + "/**/*.js",
-		css: src_folder + "/scss/**/*.scss",
-		images: src_folder + "/img/**/*.{jpg,jpeg,png,svg,gif,ico,webp}",
-		json: src_folder + "/json/**/*.*"
-	},
-  // путь к Про для удал. каждый раз при запуске Gulp 
-	clean: "./" + project_name + "/"
+  watch: {
+    html: src_folder + "/**/*.html",
+    js: src_folder + "/**/*.js",
+    css: src_folder + "/scss/**/*.scss",
+    images: src_folder + "/img/**/*.{jpg,jpeg,png,svg,gif,ico,webp}",
+    json: src_folder + "/json/**/*.*",
+  },
+  // путь к Про для удал. каждый раз при запуске Gulp
+  clean: "./" + project_name + "/",
 };
 
 // // Пишем папки которые нужно копировать через запятую
@@ -82,32 +85,35 @@ let path = {
 // }
 // fn обнова страницы
 function browserSync(done) {
-	browsersync.init({
+  browsersync.init({
     // настр. сервера
-		server: {
-			baseDir: "./" + project_name + "/"
-		},
+    server: {
+      baseDir: "./" + project_name + "/",
+    },
     // убир. доп поле инфы
-		notify: false,
+    notify: false,
     // порт открытия брауз.
-		port: 3000,
-	});
+    port: 3000,
+  });
 }
 // fn для html
 function html() {
   // возвращ перем src по пути Исход
-	return src(path.src.html, {})
-  // команды
-  // переброс ф из Исход в Про. fn pipe внутри команд gulp
-		// .pipe(fileinclude())
-    // времено Стар
-		.pipe(dest(path.build.html))
-		// .on('error', function (err) {
-		// 	console.error('Error!', err.message);
-		// })
-		// .pipe(dest(path.build.html))
-    // обнов стр.
-		.pipe(browsersync.stream());
+  return (
+    src(path.src.html, {})
+      // Команды
+      // сборщик из кусков кода
+      .pipe(fileinclude())
+      // переброс ф из Исход в Про. В fn pipe команда gulp
+      // времено Стар
+      .pipe(dest(path.build.html))
+      // .on('error', function (err) {
+      // 	console.error('Error!', err.message);
+      // })
+      // .pipe(dest(path.build.html))
+      // обнов стр./перазагрузка браузера
+      .pipe(browsersync.stream())
+  );
 }
 // function css() {
 // 	return src(path.src.css, {})
@@ -338,6 +344,6 @@ let watch = gulp.parallel(build, browserSync);
 // exports.fonts = fontsBuild;
 exports.build = build;
 exports.watch = watch;
-// при запуске gulp выполн перем по умолч.(>> watch > browserSync)
+// при запуске gulp выполн перем по умолч.(default > watch > browserSync)
 exports.default = watch;
 exports.html = html;

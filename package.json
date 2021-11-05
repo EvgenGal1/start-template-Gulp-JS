@@ -11,7 +11,7 @@
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "latest",
     "gulp-clean-css": "latest",
-    "gulp-file-include": "latest",
+    "gulp-file-include": "^2.3.0",
     "gulp-fonter": "latest",
     "gulp-group-css-media-queries": "latest",
     "gulp-imagemin": "7.1.0",
