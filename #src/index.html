@@ -1,33 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <!-- тип документа и кодировка. как обработать -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- область просмотра - мобильная отзывчивость. физическая ширина устройства(отл для мобил), макс. масштаб, масштабируется пользователем -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <meta name="author" content="EvGen Gal" />
-    <!-- описание(150 символов). для поисковых систем - сниппет поисковой выдачи. Также SEO. -->
-    <meta name="description" content="Описание" />
-    <!-- для поисковых систем. указания ключевых слов на странице -->
-    <meta name="keywords" content="Ключевые слова" />
-    <!-- для поисковых роботов. индексировать страницы, отношения к ссылкам на странице(проиндексирована, перейти по ссылкам) -->
-    <meta name="robots" content="index,follow" />
-    <!-- иконка -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <!-- подключение стилей CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-    <!-- названия страницы. для поисковых систем. названия закладки -->
-    <title>Главная</title>
-  </head>
-  <body>
-    <div class="wrapper">
-      @@include('_header.html')
-      <main>2</main>
-      <footer>3</footer>
-    </div>
-    <script src="js/main.js"></script>
-  </body>
+	@@include('_head.html',{
+	"title":"Главная"
+	})
+	<body>
+		<div class="wrapper">
+			@@include('_header.html',{})
+			<main class="page">Тело
+			</main>
+			@@include('_footer.html',{})
+		</div>
+		<!-- @@include('_popup.html',{}) -->
+		<!-- @@include('_js.html',{}) -->
+	</body>
 </html>

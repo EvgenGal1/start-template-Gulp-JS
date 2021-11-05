@@ -4,13 +4,17 @@ let { src, dest } = require("gulp");
 // let fs = require('fs');
 // для отдельных задач
 let gulp = require("gulp");
-// перем для брауз. обновл.
+// перем plg для брауз. обновл.
 let browsersync = require("browser-sync").create();
 // let autoprefixer = require("gulp-autoprefixer");
-// let scss = require('gulp-sass')(require('sass'));
+// перем plg отчистки
+let scss = require('gulp-sass')(require('sass'));
+// времено Стар
+// let scss = require("gulp-sass");
 // let group_media = require("gulp-group-css-media-queries");
 // let plumber = require("gulp-plumber");
-// let del = require("del");
+// перем plg отчистки
+let del = require("del");
 // let imagemin = require("gulp-imagemin");
 // let uglify = require("gulp-uglify-es").default;
 // let rename = require("gulp-rename");
@@ -115,19 +119,25 @@ function html() {
       .pipe(browsersync.stream())
   );
 }
-// function css() {
-// 	return src(path.src.css, {})
-// 		.pipe(
-// 			scss({ outputStyle: 'expanded' }).on('error', scss.logError)
-// 		)
-// 		.pipe(
-// 			rename({
-// 				extname: ".min.css"
-// 			})
-// 		)
-// 		.pipe(dest(path.build.css))
-// 		.pipe(browsersync.stream());
-// }
+// fn для css
+function css() {
+  // return src(path.src.css, {})
+   // времено Стар
+  return src(path.src.css, {})
+  // обр scss. настр
+    .pipe(
+      // scss({ outputStyle: 'expanded' }).on('error', scss.logError)
+      // времено Стар
+      scss({ outputStyle: "expanded" })
+    )
+    // .pipe(
+    //   rename({
+    //     extname: ".min.css",
+    //   })
+    // )
+    .pipe(dest(path.build.css))
+    .pipe(browsersync.stream());
+}
 // function json() {
 // 	return src(path.src.json, {})
 // 		.pipe(dest(path.build.json))
@@ -205,17 +215,20 @@ function html() {
 
 // }
 // function cb() { }
+// fn отчистки
+function clean() {
+  return del(path.clean);
+}
 
-// function clean() {
-// 	return del(path.clean);
-// }
-// function watchFiles() {
-// 	gulp.watch([path.watch.html], html);
-// 	gulp.watch([path.watch.css], css);
-// 	gulp.watch([path.watch.js], js);
-// 	gulp.watch([path.watch.json], json);
-// 	gulp.watch([path.watch.images], images);
-// }
+// fn для отслеж п/ф для обновл стр.
+function watchFiles() {
+  // пути отслеж файлов
+  gulp.watch([path.watch.html], html);
+  gulp.watch([path.watch.css], css);
+  // gulp.watch([path.watch.js], js);
+  // gulp.watch([path.watch.json], json);
+  // gulp.watch([path.watch.images], images);
+}
 // function cssBuild() {
 // 	return src(path.src.css, {})
 // 		.pipe(plumber())
@@ -329,15 +342,16 @@ function html() {
 // 		.pipe(browsersync.stream());
 // }
 // let fontsBuild = gulp.series(fonts_otf, fonts, fontstyle);
+// серии выполн fn и сценарии выполн
 // let buildDev = gulp.series(clean, gulp.parallel(fontsBuild, copyFolders, json, html, css, js, favicon, images));
 // let build = gulp.parallel(htmlBuild, cssBuild, jsBuild, imagesBuild);
-// вкл процесс выполнения(вкл fn для выполн)
+// вкл процесс выполнения(серия fn выполн)(html,css выполн одновременно)
 // временно Стар
-let build = gulp.series(html);
-// запуск/проверка роботоспособности
+let build = gulp.series(clean, gulp.parallel(html, css));
+// запуск/проверка роботоспособности/сценарий выполнения
 // let watch = gulp.series(buildDev, gulp.parallel(watchFiles, browserSync));
 // временно Стар
-let watch = gulp.parallel(build, browserSync);
+let watch = gulp.parallel(build, watchFiles, browserSync);
 
 // связь gulp с переменными
 // exports.copy = copyFolders;
@@ -347,3 +361,5 @@ exports.watch = watch;
 // при запуске gulp выполн перем по умолч.(default > watch > browserSync)
 exports.default = watch;
 exports.html = html;
+// временно Стар
+exports.css = css;

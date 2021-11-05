@@ -7,7 +7,7 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.27.7",
-    "del": "latest",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "latest",
     "gulp-clean-css": "latest",
