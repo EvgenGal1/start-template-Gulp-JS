@@ -1,25 +1,34 @@
 // //let replace = require('gulp-replace'); //.pipe(replace('bar', 'foo'))
-// перем src и dest к котор присвоен gulp
-let { src, dest } = require("gulp");
+// Общие Переменные
 // let fs = require('fs');
-// для отдельных задач
+// перем. src и dest к котор присвоен gulp. помощь в напис сценария
+let { src, dest } = require("gulp");
+// перем. самого Gulp для отдельных задач
 let gulp = require("gulp");
-// перем plg для брауз. обновл.
+
+// обновл. браузер
 let browsersync = require("browser-sync").create();
-// let autoprefixer = require("gulp-autoprefixer");
-// перем plg отчистки
-let scss = require('gulp-sass')(require('sass'));
-// времено Стар
-// let scss = require("gulp-sass");
-// let group_media = require("gulp-group-css-media-queries");
-// let plumber = require("gulp-plumber");
-// перем plg отчистки
-let del = require("del");
-// let imagemin = require("gulp-imagemin");
-// let uglify = require("gulp-uglify-es").default;
-// let rename = require("gulp-rename");
+// сборщик кусков кода
 let fileinclude = require("gulp-file-include");
-// let clean_css = require("gulp-clean-css");
+// удаление п/ф
+let del = require("del");
+
+// компилятор scss 
+let scss = require("gulp-sass")(require("sass"));
+// сжат css
+let clean_css = require("gulp-clean-css");
+// переименовка css в + .min.
+let rename = require("gulp-rename");
+// добав prefix к различн брауз
+let autoprefixer = require("gulp-autoprefixer");
+// групп media запросы в конце ф
+let group_media = require("gulp-group-css-media-queries");
+// сжат js(пропис с default)
+let uglify = require("gulp-uglify-es").default;
+// сжатие img
+let imagemin = require("gulp-imagemin");
+
+// let plumber = require("gulp-plumber");
 // let newer = require('gulp-newer');
 
 // let version = require('gulp-version-number');
@@ -39,7 +48,7 @@ let fileinclude = require("gulp-file-include");
 let project_name = "dist";
 let src_folder = "#src";
 
-// перем. path содер. объ. с путями к файлам и папкам
+// перем. с путями к п/ф, в объ-ах путей, из объ path
 let path = {
   // пути Про
   build: {
@@ -119,30 +128,49 @@ function html() {
       .pipe(browsersync.stream())
   );
 }
-// fn для css
-function css() {
-  // return src(path.src.css, {})
-   // времено Стар
-  return src(path.src.css, {})
-  // обр scss. настр
-    .pipe(
-      // scss({ outputStyle: 'expanded' }).on('error', scss.logError)
-      // времено Стар
-      scss({ outputStyle: "expanded" })
-    )
-    // .pipe(
-    //   rename({
-    //     extname: ".min.css",
-    //   })
-    // )
-    .pipe(dest(path.build.css))
-    .pipe(browsersync.stream());
-}
+// fn для css Разраб
+// function css() {
+//   // return src(path.src.css, {})
+//   // времено Стар
+//   return (
+//     src(path.src.css, {})
+//       // обр scss. настр
+//       .pipe(
+//         // scss({ outputStyle: 'expanded' }).on('error', scss.logError)
+//         // времено Стар
+//         scss({ outputStyle: "expanded" })
+//       )
+//       // .pipe(
+//       //   rename({
+//       //     extname: ".min.css",
+//       //   })
+//       // )
+//       // временно Стар. групп медиа
+//       .pipe(group_media())
+//       // временно Стар. autoref для различ брауз
+//       .pipe(
+//         autoprefixer({
+//           // поддерж брауз последние 5 версий
+//           overrideBrowserslist: ["last 5 versions"],
+//           // стиль autopref каскад
+//           cascade: true,
+//         })
+//       )
+//       // временно Стар. оптимиац css
+//       .pipe(clean_css())
+//       // вывод ф/п в Про
+//       .pipe(dest(path.build.css))
+//       // обновл стр
+//       .pipe(browsersync.stream())
+//   );
+// }
+
 // function json() {
 // 	return src(path.src.json, {})
 // 		.pipe(dest(path.build.json))
 // 		.pipe(browsersync.stream());
 // }
+
 // function js() {
 // 	return src(path.src.js, {})
 // 		.pipe(fileinclude())
@@ -158,11 +186,13 @@ function css() {
 // 		.pipe(dest(path.build.js))
 // 		.pipe(browsersync.stream());
 // }
+
 // function images() {
 // 	return src(path.src.images)
 // 		.pipe(newer(path.build.images))
 // 		.pipe(dest(path.build.images))
 // }
+
 // function favicon() {
 // 	return src(path.src.favicon)
 // 		.pipe(plumber())
@@ -173,6 +203,7 @@ function css() {
 // 		)
 // 		.pipe(dest(path.build.html))
 // }
+
 // function fonts_otf() {
 // 	return src('./' + src_folder + '/fonts/*.otf')
 // 		.pipe(plumber())
@@ -181,6 +212,7 @@ function css() {
 // 		}))
 // 		.pipe(gulp.dest('./' + src_folder + '/fonts/'));
 // }
+
 // function fonts() {
 // 	src(path.src.fonts)
 // 		.pipe(plumber())
@@ -191,6 +223,7 @@ function css() {
 // 		.pipe(dest(path.build.fonts))
 // 		.pipe(browsersync.stream());
 // }
+
 // function fontstyle() {
 // 	let file_content = fs.readFileSync(src_folder + '/scss/fonts.scss');
 // 	if (file_content == '') {
@@ -211,102 +244,150 @@ function css() {
 // 	}
 // 	return src(path.src.html).pipe(browsersync.stream());
 // }
-// function infofile() {
 
+// function infofile() {
 // }
+
 // function cb() { }
+
 // fn отчистки
+
 function clean() {
   return del(path.clean);
 }
 
-// fn для отслеж п/ф для обновл стр.
+// fn для Отслеж п/ф для обновл стр.
 function watchFiles() {
   // пути отслеж файлов
   gulp.watch([path.watch.html], html);
   gulp.watch([path.watch.css], css);
-  // gulp.watch([path.watch.js], js);
+  gulp.watch([path.watch.js], js);
   // gulp.watch([path.watch.json], json);
-  // gulp.watch([path.watch.images], images);
+  gulp.watch([path.watch.images], images);
 }
+// fn CSS Про
 // function cssBuild() {
-// 	return src(path.src.css, {})
-// 		.pipe(plumber())
-// 		.pipe(
-// 			scss({ outputStyle: 'expanded' }).on('error', scss.logError)
-// 		)
-// 		.pipe(group_media())
-// 		.pipe(
-// 			autoprefixer({
-// 				grid: true,
-// 				overrideBrowserslist: ["last 5 versions"],
-// 				cascade: true
-// 			})
-// 		)
-// 		.pipe(webpcss(
-// 			{
-// 				webpClass: "._webp",
-// 				noWebpClass: "._no-webp"
-// 			}
-// 		))
-// 		.pipe(dest(path.build.css))
-// 		.pipe(clean_css())
-// 		.pipe(
-// 			rename({
-// 				extname: ".min.css"
-// 			})
-// 		)
-// 		.pipe(dest(path.build.css))
-// 		.pipe(browsersync.stream());
-// }
+// временно Стар
+function css() {
+  //  возвращ перем src по пути Исход
+  return (
+    // src(path.src.css, {})
+    // временно Стар
+    src(path.src.css)
+      // .pipe(plumber())
+      // обраб scss. настр
+      .pipe(
+        // формир равёрнутым
+        // scss({ outputStyle: "expanded" }).on("error", scss.logError)
+        // временно Стар
+        scss({ outputStyle: "expanded" })
+      )
+      // групп медиа в конце ф
+      .pipe(group_media())
+      // autopref для различ брауз
+      .pipe(
+        autoprefixer({
+          // grid: true,
+          // поддерж брауз последние 5 версий
+          overrideBrowserslist: ["last 5 versions"],
+          // стиль напис autopref - каскад
+          cascade: true,
+        })
+      )
+
+      // .pipe(
+      //   webpcss({
+      //     webpClass: "._webp",
+      //     noWebpClass: "._no-webp",
+      //   })
+      // )
+      // вывод/копир ф/п в Про ДО .min.
+      .pipe(dest(path.build.css))
+      // оптимизация(сжатие) css
+      .pipe(clean_css())
+      // переименовка css в + .min.
+      .pipe(
+        rename({
+          extname: ".min.css",
+        })
+      )
+      // вывод/копир ф/п в Про
+      .pipe(dest(path.build.css))
+      // обновл стр
+      .pipe(browsersync.stream())
+  );
+}
+// fn JS Про
 // function jsBuild() {
-// 	let appPath = path.build.js + 'app.min.js';
-// 	let vendorsPath = path.build.js + 'vendors.min.js';
-// 	del(appPath);
-// 	del(vendorsPath);
-// 	return src(path.src.js, {})
-// 		.pipe(plumber())
-// 		.pipe(fileinclude())
-// 		.pipe(gulp.dest(path.build.js))
-// 		.pipe(uglify(/* options */))
-// 		.on('error', function (err) { console.log(err.toString()); this.emit('end'); })
-// 		.pipe(
-// 			rename({
-// 				suffix: ".min",
-// 				extname: ".js"
-// 			})
-// 		)
-// 		.pipe(dest(path.build.js))
-// 		.pipe(browsersync.stream());
-// }
+// временно Стар
+function js() {
+  // let appPath = path.build.js + 'app.min.js';
+  // let vendorsPath = path.build.js + 'vendors.min.js';
+  // del(appPath);
+  // del(vendorsPath);
+  // return src(path.src.js, {})
+  return (
+    src(path.src.js)
+      // .pipe(plumber())
+      .pipe(fileinclude())
+      // .pipe(gulp.dest(path.build.js))
+      // временно Стар
+      .pipe(dest(path.build.js))
+      // оптимизация(сжатие) js
+      // .pipe(uglify(/* options */))
+      .pipe(uglify())
+      // .on('error', function (err) { console.log(err.toString()); this.emit('end'); })
+      .pipe(
+        rename({
+          // suffix: ".min",
+          // extname: ".js"
+          // временно Стар
+          extname: ".min.js",
+        })
+      )
+      .pipe(dest(path.build.js))
+      .pipe(browsersync.stream())
+  );
+}
+// fn IMAGES Про
 // function imagesBuild() {
-// 	return src(path.src.images)
-// 		//.pipe(newer(path.build.images))
-// 		.pipe(
-// 			imagemin([
-// 				webp({
-// 					quality: 85
-// 				})
-// 			])
-// 		)
-// 		.pipe(
-// 			rename({
-// 				extname: ".webp"
-// 			})
-// 		)
-// 		.pipe(dest(path.build.images))
-// 		.pipe(src(path.src.images))
-// 		//.pipe(newer(path.build.images))
-// 		.pipe(
-// 			imagemin({
-// 				progressive: true,
-// 				svgoPlugins: [{ removeViewBox: false }],
-// 				interlaced: true,
-// 				optimizationLevel: 3 // 0 to 7
-// 			})
-// 		)
-// 		.pipe(dest(path.build.images))
-// }
+// временно Стар
+function images() {
+  return (
+    src(path.src.images)
+      //	// .pipe(newer(path.build.images))
+      // .pipe(
+      // 	imagemin([
+      // 		webp({
+      // 			quality: 85
+      // 		})
+      // 	])
+      // )
+      // .pipe(
+      // 	rename({
+      // 		extname: ".webp"
+      // 	})
+      // )
+      // .pipe(dest(path.build.images))
+      // .pipe(src(path.src.images))
+      // //.pipe(newer(path.build.images))
+      // сжатие img
+      .pipe(
+      	imagemin({
+      		progressive: true,
+          // улучш. раб с svg
+      		svgoPlugins: [{ removeViewBox: false }],
+          // раб с разн формат изобр
+      		interlaced: true,
+          // сила сжатия
+      		optimizationLevel: 3 // 0 to 7
+      	})
+      )
+      .pipe(dest(path.build.images))
+      .pipe(browsersync.stream())
+  );
+}
+
 // function htmlBuild() {
 // 	return src(path.src.html, {})
 // 		.pipe(plumber())
@@ -341,19 +422,21 @@ function watchFiles() {
 // 		.pipe(dest(path.build.html))
 // 		.pipe(browsersync.stream());
 // }
+
 // let fontsBuild = gulp.series(fonts_otf, fonts, fontstyle);
-// серии выполн fn и сценарии выполн
+
+// Серии выполняемых fn и Сценарии выполнения ПРО
 // let buildDev = gulp.series(clean, gulp.parallel(fontsBuild, copyFolders, json, html, css, js, favicon, images));
 // let build = gulp.parallel(htmlBuild, cssBuild, jsBuild, imagesBuild);
-// вкл процесс выполнения(серия fn выполн)(html,css выполн одновременно)
+// Серии fn вкл-ых в проц. выполн. РАЗРАБ (html,css,js выполн одновременно)
 // временно Стар
-let build = gulp.series(clean, gulp.parallel(html, css));
-// запуск/проверка роботоспособности/сценарий выполнения
+let build = gulp.series(clean, gulp.parallel(html, css, js, images));
+// Сценарий выполнения. РАЗРАБ (запуск/проверка робот.собн.)
 // let watch = gulp.series(buildDev, gulp.parallel(watchFiles, browserSync));
 // временно Стар
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
-// связь gulp с переменными
+// Связь gulp с переменными
 // exports.copy = copyFolders;
 // exports.fonts = fontsBuild;
 exports.build = build;
@@ -363,3 +446,7 @@ exports.default = watch;
 exports.html = html;
 // временно Стар
 exports.css = css;
+// временно Стар
+exports.js = js;
+// временно Стар
+exports.images = images;

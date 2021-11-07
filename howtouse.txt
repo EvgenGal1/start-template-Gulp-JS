@@ -41,17 +41,27 @@ $$ gulp
 В перем path объекты с путями к п/ф (папкам/файлам) + прослуш.файлы(watch) + отчистка
 доп. перем. 
 
-++ пропис серии выполняемых fn и сценарии выполнения
-++ устан доп plugins:
-$$ npm i browser-sync --save-dev - обнов страницу(перем.,fn,вкл в сценарий,привязка к gulp)
-$$ npm i gulp-file-include --save-dev - сборщик кусков кода/др файлов(шаблонизатор с переменными)(перем.,)
-$$ npm i del --save-dev - удаление п/ф (перем., fn, вкл в серию выпон fn)
-$$ npm i gul-sass --save-dev - sass(scss) в css
+++ пропис Серии выполняемых fn и Сценарии выполнения
 
-++ fn-й для сбора ф/п
-++ fn html(перем.,fn,вкл. в серию,привязка)
-++ fn watchFiles для отслеживания файлов в брауз в реале(fn, вкл в сценарий)
-++ fn css(перем.,fn,вкл. в серию,привязка)
++++++ fn/код для сбора/обраб ф/п:
+++ html(пишем fn,вкл. в Отслежив в брауз,вкл. в Серию выполн. fn,Связь с Gulp через перем)
+++ watchFiles - для Отслеживания файлов в брауз в реале(fn, вкл в Сценарий выполн)
+++ css(перем.,fn,Отслеж,Серия,Связь)
+++ js(fn,Отслеж,Серия,Связь)
+! для старых брайзеров нужно настроить babel - https://www.npmjs.com/package/gulp-babel
+++ images(fn,Отслеж,Серия,Связь)
+
++++++ устан доп plugins:
+$$ npm i browser-sync --save-dev - обнов страниц(перем.для plugin,пишем fn,вкл в Сценарий,Связь к gulp)
+$$ npm i gulp-file-include --save-dev - сборщик кусков кода/др файлов(шаблонизатор с переменными)(перем.,)
+$$ npm i del --save-dev - удаление п/ф (перем.,fn,Серия)
+$$ npm i gulp-sass --save-dev - компилятор.sass(scss) в css (перем, в fn css)
+$$ npm i gulp-autoprefixer --save-dev - добав вендорные prefix к сво-ам (перем, в fn css)
+$$ npm i gulp-group-css-media-queries --save-dev - групп. медиа запросы в конце ф (перем, в fn css)
+$$ npm i gulp-clean-css --save-dev - отчист и сжат css (перем, в fn css)
+$$ npm i gulp-rename --save-dev - переименвка css в min (перем, в fn css)
+$$ npm i gulp-uglify-es --save-dev - отчист и сжат js (перем, в fn js)
+$$ npm i gulp-imagemin --save-dev - сжат img (перем, в fn images)
 
 запуск/проверка работы - $$ gulp - выведено норм.
 
