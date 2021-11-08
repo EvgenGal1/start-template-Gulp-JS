@@ -29,6 +29,12 @@ $md1: $maxWidthContainer + 12;
 $md2: 991.98;
 $md3: 767.98;
 $md4: 479.98;
+// ??? не раб - в медиа не читает переменные с "+ px".
+$maxWidthContainerNoErr: 1170px;
+$md1NoErr: $maxWidthContainerNoErr + 12px;
+$md2NoErr: 991.98px;
+$md3NoErr: 767.98px;
+$md4NoErr: 479.98px;
 
 $mainColor: #000;
 
@@ -37,39 +43,41 @@ $mainColor: #000;
 //<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===============================================================================================
 @import "null";
 body {
-	color: $mainColor;
-	&._lock {
-		overflow: hidden;
-	}
+  color: $mainColor;
+  &._lock {
+    overflow: hidden;
+  }
 }
 //</ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===============================================================================================
 
 //<ОБОЛОЧКА>===========================================================================================================
 .wrapper {
-	width: 100%;
-	min-height: 100%;
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	&._loaded {
-	}
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  &._loaded {
+  }
 }
 //</ОБОЛОЧКА>===========================================================================================================
 
 //<ОСНОВНАЯ СЕТКА>===========================================================================================================
 ._container {
-	max-width: $maxWidthContainer + px;
-	margin: 0 auto;
-	@media (max-width: $md1 + px) {
-		max-width: 970px;
-	}
-	@media (max-width: $md2+px) {
-		max-width: 750px;
-	}
-	@media (max-width: $md3+px) {
-		max-width: none;
-		padding: 0 10px;
-	}
+  max-width: $maxWidthContainer + px;
+  margin: 0 auto;
+  // ??? не раб - в медиа не читает переменные с "+ px".
+  // @media (max-width: $md1NoErr + px) {
+  @media (max-width: $md1NoErr) {
+    max-width: 970px;
+  }
+  @media (max-width: $md2NoErr) {
+    max-width: 750px;
+  }
+  @media (max-width: $md3NoErr) {
+    max-width: none;
+    padding: 0 10px;
+  }
 }
 //</ОСНОВНАЯ СЕТКА>===========================================================================================================
 
@@ -89,8 +97,16 @@ body {
 //</ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>====================================================================================================
 
 //<ОСНОВНОЙ БЛОК>====================================================================================================
-.page {
-	flex: 1 1 auto;
+.main {
+  flex: 1 1 auto;
+}
+.qwe {
+  background: url(../img/Family/1.jpg) 0 0 no-repeat;
+  img {
+    width: 50%;
+    // height: 100vh;
+    // height: 300px;
+  }
 }
 //===================================================================================================================================
 

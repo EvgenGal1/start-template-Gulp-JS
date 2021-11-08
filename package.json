@@ -1,35 +1,10 @@
 {
   "name": "gulp_js",
   "version": "1.0.1",
-  "description": "Start template with Gulp",
+  "description": "Шаблон запуска Gulp + JS",
   "author": "EvGen Gal",
   "private": true,
   "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.27.7",
-    "del": "^6.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-file-include": "^2.3.0",
-    "gulp-fonter": "latest",
-    "gulp-group-css-media-queries": "^1.2.2",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-newer": "latest",
-    "gulp-plumber": "latest",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "latest",
-    "gulp-ttf2woff": "latest",
-    "gulp-ttf2woff2": "latest",
-    "gulp-uglify-es": "latest",
-    "gulp-version-number": "latest",
-    "gulp-webp-html": "latest",
-    "gulp-webpcss": "latest",
-    "imagemin-webp": "latest",
-    "sass": "latest",
-    "transform-runtime": "0.0.0",
-    "webp-converter": "2.2.3"
-  },
   "main": "Шаблон Gulp + JS",
   "scripts": {
     "test": "index.html"
@@ -41,5 +16,25 @@
   "bugs": {
     "url": "https://github.com/EvgenGal1/start-template-Gulp-JS/issues"
   },
-  "homepage": "https://github.com/EvgenGal1/start-template-Gulp-JS#readme"
+  "homepage": "https://github.com/EvgenGal1/start-template-Gulp-JS#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-file-include": "^2.3.0",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-ttf2woff": "^1.1.1",
+    "gulp-ttf2woff2": "^4.0.1",
+    "gulp-uglify-es": "^3.0.0",
+    "gulp-webp": "^4.0.1",
+    "gulp-webp-html": "^1.0.2",
+    "gulp-webpcss": "^1.1.1",
+    "sass": "^1.43.4",
+    "webp-converter": "^2.2.3"
+  }
 }
