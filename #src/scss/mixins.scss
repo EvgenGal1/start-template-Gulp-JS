@@ -1,4 +1,4 @@
-//Подключение шрифта
+// Подключение шрифта
 @mixin font($font_name, $file_name, $weight, $style) {
   @font-face {
     font-family: $font_name;
@@ -9,7 +9,7 @@
     font-style: #{$style};
   }
 }
-//Адаптивное свойство
+// Адаптивное свойство
 @mixin adaptiv-value($property, $startSize, $minSize, $type) {
   $addSize: $startSize - $minSize;
   @if $type==1 {
@@ -36,7 +36,7 @@
     );
   }
 }
-//Адаптивное свойство до
+// Адаптивное свойство До
 @mixin adaptiv-value-to($property, $startSize, $minSize, $minWidth) {
   $addSize: $startSize - $minSize;
   //#{$property}: $minSize + px;
@@ -46,4 +46,9 @@
         (((100vw - #{$minWidth + px})) / ((#{$maxWidth - $minWidth})))
     );
   }
+}
+// Размер в одну строку(@include size(80px, 50px);)
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
 }

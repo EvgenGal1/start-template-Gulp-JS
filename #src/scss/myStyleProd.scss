@@ -1,0 +1,62 @@
+// Общие =======================================================================================
+body {
+  font-size: 20px;
+  line-height: 150%;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background-color: #333;
+  color: #fff;
+}
+.page {
+  padding: 30px;
+}
+// Gulp Настр. =======================================================================================
+// откл. на время Gulp Инстр.
+.gulp-sett {
+  display: none;
+  .qwe {
+    background: url(../img/Family/1.jpg) 0 0 no-repeat;
+    img {
+      width: 50%;
+      // height: 100vh;
+      // height: 300px;
+    }
+  }
+}
+// Gulp Инстр. =======================================================================================
+.gulp-instr {
+  .tabs {
+    h3{
+      
+    }
+    .tabs-block {
+
+      &__nav {
+        display: flex;
+        margin: 0px -2px;
+      }
+  
+      &__item {
+        display: flex;
+        flex: 0 1 33.333%;
+        justify-content: center;align-items: center;
+        margin: 0px 2px;
+        padding: 20px;
+        background-color: #7a956b;
+        background-color: #508050;
+        // добав так как навигация не ссылками
+        cursor: pointer;
+        &._active {
+          background-color: #77608d;
+          background-color: #404080;
+        }
+      }
+  
+      &__body {
+      }
+  
+      &__block {
+      }
+  }
+  
+  }
+}

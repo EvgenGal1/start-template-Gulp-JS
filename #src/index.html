@@ -4,9 +4,42 @@
   <body>
     <div class="wrapper">
       @@include('_header.html',{})
-      <main class="main">
-        Тело
-        <div class="qwe"><img src="./img/Family/4.jpg" alt="" />`</div>
+      <main class="page">
+        <div class="gulp-sett">
+          Тело
+          <div class="qwe"><img src="./img/Family/4.jpg" alt="" />`</div>
+        </div>
+        <div class="gulp-instr">
+          <!-- TAB -->
+          <div class="tabs">
+            <!-- 2 блока(навиг и контент): один Таб и Контент всегда выделен - техклас _active;  -->
+            <h3>Табы (изменения контента в блоке по нажатию на навигацию)</h3>
+            <div class="tabs-block">
+              <!-- навигация(клик) -->
+              <nav class="tabs-block__nav">
+                <!-- контент(меняется) -->
+                <div class="tabs-block__item _active">Таб №1</div>
+                <div class="tabs-block__item">Таб №2</div>
+                <div class="tabs-block__item">Таб №3</div>
+              </nav>
+              <!-- блоки (меняются) -->
+              <div class="tabs-block__body">
+                <div class="tabs-block__block _active">
+                  [Таб №1] Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Nihil veniam praesentium est porro explicabo vel.
+                </div>
+                <div class="tabs-block__block">
+                  [Таб №2] Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Nihil veniam praesentium est porro explicabo vel.
+                </div>
+                <div class="tabs-block__block">
+                  [Таб №3] Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Nihil veniam praesentium est porro explicabo vel.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
       @@include('_footer.html',{})
     </div>
