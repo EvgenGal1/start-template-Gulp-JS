@@ -18,12 +18,42 @@
 // $smPhoneWidth: 320px;
 
 // Evgen Gal =======================================================================================
+// переименовать
 $DarkRed: #8b0000; // темно-красный
 $CrimsonBrown: #4b0000; // коричнево-малиновый
 $WhiteAlum: #a3a3a3; // бело-алюминиевый
 $DullGray: #707070; // тусклый серый
 $WetAsphalt: #555555; // мокрый асфальта
 $SignalBlack: #333333; // cигнальный черный
+
+// основные цвета (Main)
+$col-m-default: #f5f5f5;
+$col-m-primary: #1b1b7e;
+// $col-m-success: #508050;
+$col-m-danger: #8b0000;
+$col-m-warning: #fad201;
+// $col-m-light: #999999;
+// $col-m-purple: #8854d0;
+
+// Мутные (Turbid)
+$col-T-default: #f5f5f5;
+$col-T-primary: #404080;
+$col-T-success: #508050;
+$col-T-danger: #8b2525;;
+$col-T-warning: #bead0f;
+$col-T-light: #999999;
+$col-T-purple: #8854d0;
+
+// Тёмные (Dark)
+// $col-D-default: #f5f5f5;
+// $col-D-primary: #4f4f8f;
+// $col-D-success: #508050;
+$col-D-danger: #4b0000;
+// $col-D-warning: #bead0f;
+// $col-D-light: #999999;
+// $col-D-purple: #8854d0;
+
+// =======================================================================================
 
 /*
   All colors taken from:

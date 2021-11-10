@@ -11,39 +11,73 @@
         </div>
         <div class="gulp-instr">
           <!-- TAB -->
-          <div class="tabs">
-            <!-- 2 блока(навиг и контент): один Таб и Контент всегда выделен - техклас _active;  -->
+          <div class="block-item">
+            <!-- 2 блока(навиг и контент) -->
+            <!-- добав техклас для связи с js и scss -->
+            <!-- _active - один Таб и Контент всегда выделен -->
+            <!-- _tabs - для уникал блока табс(если таб неск) -->
+            <!-- _tabs-item - на кнп -->
+            <!-- _tabs-block - на контент -->
             <h3>Табы (изменения контента в блоке по нажатию на навигацию)</h3>
-            <div class="tabs-block">
+            <div class="tabs-block _tabs">
               <!-- навигация(клик) -->
               <nav class="tabs-block__nav">
-                <!-- контент(меняется) -->
-                <div class="tabs-block__item _active">Таб №1</div>
-                <div class="tabs-block__item">Таб №2</div>
-                <div class="tabs-block__item">Таб №3</div>
+                <!-- кнп(меняется) -->
+                <div class="tabs-block__item _tabs-item _active">Таб №1</div>
+                <div class="tabs-block__item _tabs-item">Таб №2</div>
+                <div class="tabs-block__item _tabs-item">Таб №3</div>
               </nav>
-              <!-- блоки (меняются) -->
+              <!-- общ блок контента -->
               <div class="tabs-block__body">
-                <div class="tabs-block__block _active">
+                <!-- контент (меняется)  -->
+                <div class="tabs-block__block _tabs-block _active">
                   [Таб №1] Lorem ipsum dolor sit amet consectetur adipisicing
                   elit. Nihil veniam praesentium est porro explicabo vel.
                 </div>
-                <div class="tabs-block__block">
+                <div class="tabs-block__block _tabs-block">
                   [Таб №2] Lorem ipsum dolor sit amet consectetur adipisicing
                   elit. Nihil veniam praesentium est porro explicabo vel.
                 </div>
-                <div class="tabs-block__block">
+                <div class="tabs-block__block _tabs-block">
                   [Таб №3] Lorem ipsum dolor sit amet consectetur adipisicing
                   elit. Nihil veniam praesentium est porro explicabo vel.
                 </div>
               </div>
             </div>
           </div>
+          <!-- СПОЛЕР -->
+          <div class="block-item">
+            <h3>Сполер (выезжающий текст по нажатию на кнопку)</h3>
+            <!-- оболочка -->
+            <div class="spollers-block">
+              <!-- сполер -->
+              <div class="spollers-block__item">
+                <!-- заголовок (клик) всегде первый -->
+                <div class="spollers-block__title">Вопрос?</div>
+                <!-- контент (скрыт) всегда после -->
+                <div class="spollers-block__body">Ответ! Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus cupiditate sunt consequatur velit dolorum ad!</div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="block-item">
+            <h3>...(.....)</h3>
+            <div class="-block"></div>
+          </div>
+          <!--  -->
+          <div class="block-item">
+            <h3>...(.....)</h3>
+            <div class="-block"></div>
+          </div>
+          <!--  -->
+          <div class="block-item">
+            <h3>...(.....)</h3>
+            <div class="-block"></div>
+          </div>
         </div>
       </main>
       @@include('_footer.html',{})
     </div>
-    <!-- @@include('_popup.html',{}) -->
-    <!-- @@include('_js.html',{}) -->
+    @@include('_popup.html',{}) @@include('_js.html',{})
   </body>
 </html>

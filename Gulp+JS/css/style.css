@@ -975,14 +975,23 @@ body {
   width: 50%;
 }
 
-.gulp-instr .tabs .tabs-block__nav {
+.gulp-instr h3 {
+  text-align: center;
+  color: #bead0f;
+}
+
+.gulp-instr .block-item {
+  margin: 0px 0px 30px 0px;
+}
+
+.gulp-instr .tabs-block__nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin: 0px -2px;
 }
 
-.gulp-instr .tabs .tabs-block__item {
+.gulp-instr .tabs-block__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1002,9 +1011,47 @@ body {
   cursor: pointer;
 }
 
-.gulp-instr .tabs .tabs-block__item._active {
+.gulp-instr .tabs-block__item._active {
   background-color: #77608d;
   background-color: #404080;
+}
+
+.gulp-instr .spollers-block__title {
+  background-color: #794f45;
+  background-color: #8b2525;
+  cursor: pointer;
+  padding: 20px;
+  position: relative;
+}
+
+.gulp-instr .spollers-block__title::before {
+  content: "";
+  width: 20px;
+  background-color: #fff;
+  height: 2px;
+  -webkit-transform: translate(0, -50%) rotate(-45deg);
+      -ms-transform: translate(0, -50%) rotate(-45deg);
+          transform: translate(0, -50%) rotate(-45deg);
+  position: absolute;
+  right: 15px;
+  top: 50%;
+}
+
+.gulp-instr .spollers-block__title::after {
+  content: "";
+  width: 20px;
+  background-color: #fff;
+  height: 2px;
+  -webkit-transform: translate(0, -50%) rotate(45deg);
+      -ms-transform: translate(0, -50%) rotate(45deg);
+          transform: translate(0, -50%) rotate(45deg);
+  position: absolute;
+  right: 29px;
+  top: 50%;
+}
+
+.gulp-instr .spollers-block__body {
+  padding: 20px 0px 0px 0px;
 }
 
 .main {
