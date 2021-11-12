@@ -77,7 +77,7 @@ $$ gulp
 $$ npm i browser-sync --save-dev - обнов страниц(перем.для plugin,пишем fn,вкл в Сценарий,Связь к gulp)
 $$ npm i gulp-file-include --save-dev - сборщик кусков кода/др файлов(шаблонизатор с переменными)(перем.,)
 $$ npm i del --save-dev - удаление п/ф (перем.,fn,Серия)
-$$ npm i gulp-sass --save-dev - компилятор.sass(scss) в css (перем, в fn css)
+$$ npm install sass gulp-sass --save-dev - компилятор.sass(scss) в css (перем, в fn css)
 $$ npm i gulp-autoprefixer --save-dev - добав вендорные prefix к сво-ам (перем, в fn css)
 $$ npm i gulp-group-css-media-queries --save-dev - групп. медиа запросы в конце ф (перем, в fn css)
 $$ npm i gulp-clean-css --save-dev - отчист и сжат css (перем, в fn css)
@@ -93,7 +93,7 @@ $$ npm i webp-converter@2.2.3 --save-dev - от проблемы с plg WEBPCSS
 $$ npm i gulp-ttf2woff gulp-ttf2woff2 --save-dev - компилирует шрифты ttf в woff/woff2 (перем)
 $$ npm i gulp-fonter --save-dev - конвертирует др шрифты в woff/woff2 (перем) - видео(stFOy0Noahg 1:08:14)
 
-Почти все plugins - npm i --save-dev browser-sync gulp-file-include del gulp-sass gulp-autoprefixer gulp-group-css-media-queries gulp-clean-css gulp-rename gulp-uglify-es gulp-imagemin@7.1.0 gulp-webp gulp-webp-html gulp-webpcss gulp-ttf2woff gulp-ttf2woff2 webp-converter@2.2.3
+Почти все plugins - npm i --save-dev browser-sync gulp-file-include del gulp-sass sass gulp-autoprefixer gulp-group-css-media-queries gulp-clean-css gulp-rename gulp-uglify-es gulp-imagemin@7.1.0 gulp-webp gulp-webp-html gulp-webpcss gulp-ttf2woff gulp-ttf2woff2 webp-converter@2.2.3
 
 +++++ js
 fn testWebP опред поддержки .webp(добав/объяв класс)
@@ -177,9 +177,11 @@ imagemin следует оставлять 7й версии!
 scss = require('gulp-sass')(require('sass'));
 scss({ outputStyle: 'expanded' }).on('error', scss.logError)
 --------------------------------------
-проблемы с plg WEBPCSS - устан. converter  - $$ npm install webp-converter@2.2.3 --save-dev
+проблемы с plg WEBPCSS - устан. converter
+$$ npm install webp-converter@2.2.3 --save-dev
 --------------------------------------
-проблемы с Error[ERR_REQUIRE_ESM]:require() of ES Module C:\...\gulp-imagemin\index.js from C:\...\gulpfile.js not supported. - устан. imagemin опред версии -  npm i gulp-imagemin@7.1.0 --save-dev
+проблемы с Error[ERR_REQUIRE_ESM]:require() of ES Module C:\...\gulp-imagemin\index.js from C:\...\gulpfile.js not supported. - устан. imagemin опред версии
+$$ npm i gulp-imagemin@7.1.0 --save-dev
 --------------------------------------
 WEBP-CSS настр: webpcss({webpClass: '.webp',noWebpClass: '.no-webp'}
 --------------------------------------

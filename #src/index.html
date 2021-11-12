@@ -47,60 +47,184 @@
           </div>
           <!-- СПОЛЕР -->
           <div class="block-item">
+            <!-- ??? не раб - на атр(data-spollers) не выводит контент(spollers-block__body). не добавл display:block -->
+            <!-- ! Куски Старого кодо раскомичены в разделе SlideToggle (_slideToggle и _slideUp). Новый код на атр data-spollers не выводит контент (display block) -->
             <h3>Сполер (выезжающий текст по нажатию на кнопку)</h3>
-            <!-- матрешка. блок -> блок -> titl(клик) + body(скрыт) -->
-            <!-- добав техклас для связи с js и scss(начи _так) -->
+            <!-- матрешка. блок(оболочка) -> блок(сполер, один из) -> titl(клик) + body(скрыт) -->
+            <!-- добав техклас для связи с js и scss(начи _так): -->
             <!-- _spollers - для уникал блока spoller(если spollerов неск) -->
             <!-- _spoller - на titl(заголовок) -->
             <!-- _one - для открытия только одного сполера(аккардион) -->
             <!-- оболочка -->
             <!-- Новый код - data-spollers -->
-            <div class="spollers-block _spollers _one">
+            <div data-spollers class="spollers-block _spollers _one">
               <!-- сполер -->
               <div class="spollers-block__item">
                 <!-- заголовок (клик) всегде первый -->
-                <!-- Новый код - data-spollers -->
-                <div class="spollers-block__title _spoller">Вопрос?</div>
+                <!-- Новый код - data-spoller -->
+                <div data-spoller class="spollers-block__title _spoller">Вопрос 1?</div>
                 <!-- контент (скрыт) всегда после -->
                 <div class="spollers-block__body">
-                  Ответ! Lorem ipsum dolor sit amet consectetur adipisicing
+                  Ответ 1! Lorem ipsum dolor sit amet consectetur adipisicing
                   elit. Possimus cupiditate sunt consequatur velit dolorum ad!
                 </div>
               </div>
               <div class="spollers-block__item">
                 <div data-spoller class="spollers-block__title _spoller">
-                  Вопрос?
+                  Вопрос 2?
                 </div>
                 <div class="spollers-block__body">
-                  Ответ! Lorem ipsum dolor sit amet consectetur adipisicing
+                  Ответ 2! Lorem ipsum dolor sit amet consectetur adipisicing
                   elit. Possimus cupiditate sunt consequatur velit dolorum ad!
                 </div>
               </div>
               <div class="spollers-block__item">
                 <div data-spoller class="spollers-block__title _spoller">
-                  Вопрос?
+                  Вопрос 3?
                 </div>
                 <div class="spollers-block__body">
-                  Ответ! Lorem ipsum dolor sit amet consectetur adipisicing
+                  Ответ 3! Lorem ipsum dolor sit amet consectetur adipisicing
                   elit. Possimus cupiditate sunt consequatur velit dolorum ad!
                 </div>
               </div>
             </div>
           </div>
-          <!--  -->
+          <!-- ФОРМЫ -->
           <div class="block-item">
             <h3>...(.....)</h3>
-            <div class="-block"></div>
+            <!-- матрешка. блок(оболочка) -> блок(форма, один из) -> label(клик) + input(скрыт) -->
+            <!-- добав техклас для связи с js и scss(начи _так): -->
+            <!-- _req - добавл. div.forme__error для вывода ошб. -->
+            <!-- + _error, от _req добав к .form__line - (ф forms.scss) настр. форм. -->
+            <!-- + _error, от _req добав к .input - (ф forms.scss) настр. ошб. -->
+            <!-- inp - связь label и inp -->
+            <!-- оболочка -->
+            <form action="#" class="form _scr-item">
+              <!-- форма. станд -->
+              <div class="form__line">
+                <label for="inp" class="form__label">Подпись поля</label>
+                <!-- .input(ф forms.scss) настр. ввода -->
+                <!-- data-error и data-value(валидац.,хзаполнитель) -->
+
+                <input
+                  id="inp"
+                  autocomplete="off"
+                  type="text"
+                  name="form[]"
+                  data-error="Ошибка"
+                  data-value="Подпись поля"
+                  class="input _date _req"
+                />
+              </div>
+              <div class="form__line">
+                <select name="form[]" class="form">
+                  <option value="1" selected="selected">Пункт №1</option>
+                  <option value="2">Пункт №2</option>
+                  <option value="3">Пункт №3</option>
+                  <option value="4">Пункт №4</option>
+                </select>
+              </div>
+              <div class="form__line">
+                <div class="quantity">
+                  <div class="quantity__button quantity__button_plus"></div>
+                  <div class="quantity__input">
+                    <input autocomplete="off" type="text" name="form[]" value="1" />
+                  </div>
+                  <div class="quantity__button quantity__button_minus"></div>
+                </div>
+              </div>
+              <div class="form__line">
+                <div class="price">
+                  <div class="price__range"></div>
+                  <div class="price__inputs">
+                    <input
+                      id="price-start"
+                      autocomplete="off"
+                      type="text"
+                      name="form[]"
+                      class="input"
+                    />
+                    <input
+                      id="price-end"
+                      autocomplete="off"
+                      type="text"
+                      name="form[]"
+                      class="input"
+                    />
+                  </div>
+                </div>
+              </div>
+              <input autocomplete="off" type="text" name="form[]" data-value="" class="input">
+              <!-- .btn (ф forms.scss) настр. кнп. -->
+              <button type="submit" class="form__btn btn">Задать вопрос</button>
+            </form>
           </div>
-          <!--  -->
+          <!-- СЛАЙДЕР -->
           <div class="block-item">
             <h3>...(.....)</h3>
-            <div class="-block"></div>
+            <div class="slider _scr-item _swiper">
+              <div class="slider__slide">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio,
+                inventore harum nesciunt enim quibusdam sapiente quisquam dolor non
+                tempore voluptates, at, totam eos delectus corrupti fugiat in numquam nam.
+              </div>
+              <div class="slider__slide">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio,
+                inventore harum nesciunt enim quibusdam sapiente quisquam dolor non
+                tempore voluptates, at, totam eos delectus corrupti fugiat in numquam nam.
+              </div>
+              <div class="slider__slide">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio,
+                inventore harum nesciunt enim quibusdam sapiente quisquam dolor non
+                tempore voluptates, at, totam eos delectus corrupti fugiat in numquam nam.
+              </div>
+            </div>
           </div>
-          <!--  -->
+          <!-- ?ТЕКС? -->
           <div class="block-item">
             <h3>...(.....)</h3>
-            <div class="-block"></div>
+            <div class="block-item">
+              <h3>...(.....)</h3>
+              <div class="text _scr-item">
+                Lorem
+                <a href="#video" data-video="OsF9H7yRnvU" class="_popup-link">ipsum</a>
+                dolor sit amet consectetur <a href="" class="tippy">adipisicing</a> elit.
+                Quos veritatis error cumque tempora aliquid itaque perferendis, voluptates
+                eum deleniti mollitia labore odio perspiciatis ratione dolorum nobis omnis
+                iusto? Corporis, saepe. Lorem ipsum dolor sit amet
+                <a href="#callback" class="_popup-link">consectetur</a> adipisicing elit.
+                Quos veritatis error cumque tempora aliquid itaque perferendis, voluptates
+                eum deleniti mollitia labore odio perspiciatis ratione dolorum nobis omnis
+                iusto? Corporis, saepe. Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Quos veritatis error cumque tempora aliquid itaque perferendis,
+                voluptates eum deleniti mollitia labore odio perspiciatis ratione dolorum
+                nobis omnis iusto? Corporis, saepe.
+              </div>
+            </div>
+          </div>
+          <!-- ГАЛЛЕРЕЯ -->
+          <div class="block-item">
+            <h3>...(.....)</h3>
+            <div class="gallery-block _scr-item _gallery">
+              <a href="img/Family/1.jpg" class="gallery-block__item">
+                <img src="img/Family/1.jpg" alt="">
+              </a>
+              <a href="img/Family/2.jpg" class="gallery-block__item">
+                <img src="img/Family/2.jpg" alt="">
+              </a>
+              <a href="img/Family/3.jpg" class="gallery-block__item">
+                <img src="img/Family/3.jpg" alt="">
+              </a>
+              <a href="img/Family/4.jpg" class="gallery-block__item">
+                <img src="img/Family/4.jpg" alt="">
+              </a>
+              <a href="img/Family/5.jpg" class="gallery-block__item">
+                <img src="img/Family/5.jpg" alt="">
+              </a>
+              <a href="img/Family/6.jpg" class="gallery-block__item">
+                <img src="img/Family/6.jpg" alt="">
+              </a>
+            </div>
           </div>
         </div>
       </main>
