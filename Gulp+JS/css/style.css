@@ -954,9 +954,13 @@ body.ie ._ibg img {
 body {
   font-size: 20px;
   line-height: 150%;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   background-color: #333;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #fff;
+}
+
+body._lock {
+  overflow: hidden;
 }
 
 .page {
@@ -1016,12 +1020,25 @@ body {
   background-color: #404080;
 }
 
+.gulp-instr .tabs-block__body {
+  padding: 20px 0px 0px 0px;
+}
+
+.gulp-instr .spollers-block__item {
+  margin: 0px 0px 20px 0px;
+}
+
+.gulp-instr .spollers-block__item:last-child {
+  margin: 0px 0px 0px 0px;
+}
+
 .gulp-instr .spollers-block__title {
+  position: relative;
   background-color: #794f45;
   background-color: #8b2525;
   cursor: pointer;
   padding: 20px;
-  position: relative;
+  padding: 20px 70px 20px 20px;
 }
 
 .gulp-instr .spollers-block__title::before {
@@ -1029,6 +1046,11 @@ body {
   width: 20px;
   background-color: #fff;
   height: 2px;
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  -o-transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
   -webkit-transform: translate(0, -50%) rotate(-45deg);
       -ms-transform: translate(0, -50%) rotate(-45deg);
           transform: translate(0, -50%) rotate(-45deg);
@@ -1042,6 +1064,11 @@ body {
   width: 20px;
   background-color: #fff;
   height: 2px;
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  -o-transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
   -webkit-transform: translate(0, -50%) rotate(45deg);
       -ms-transform: translate(0, -50%) rotate(45deg);
           transform: translate(0, -50%) rotate(45deg);
@@ -1050,11 +1077,94 @@ body {
   top: 50%;
 }
 
+.gulp-instr .spollers-block__title._active::before {
+  -webkit-transform: translate(0, -50%) rotate(45deg);
+      -ms-transform: translate(0, -50%) rotate(45deg);
+          transform: translate(0, -50%) rotate(45deg);
+}
+
+.gulp-instr .spollers-block__title._active::after {
+  -webkit-transform: translate(0, -50%) rotate(-45deg);
+      -ms-transform: translate(0, -50%) rotate(-45deg);
+          transform: translate(0, -50%) rotate(-45deg);
+}
+
 .gulp-instr .spollers-block__body {
+  display: none;
   padding: 20px 0px 0px 0px;
 }
 
-.main {
+.gulp-instr .form {
+  margin: 0px 0px 50px 0px;
+}
+
+.gulp-instr .form__line {
+  margin: 0px 0px 20px 0px;
+}
+
+.gulp-instr .form__label {
+  display: inline-block;
+  margin: 0px 0px 15px 0px;
+}
+
+.gulp-instr .slider {
+  margin: 0px 0px 50px 0px;
+}
+
+.gulp-instr .text {
+  -webkit-transform: translate(0px, 100px);
+      -ms-transform: translate(0px, 100px);
+          transform: translate(0px, 100px);
+  opacity: 0;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  margin: 0px 0px 50px 0px;
+}
+
+.gulp-instr .text a {
+  color: red;
+}
+
+.gulp-instr .text._active {
+  -webkit-transform: translate(0px, 0px);
+      -ms-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+  opacity: 1;
+}
+
+.gulp-instr .price__inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.gulp-instr .price__inputs input {
+  margin: 0px 10px 0px 0px;
+}
+
+.gulp-instr .gallery-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0px -10px;
+}
+
+.gulp-instr .gallery-block__item {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 33.333%;
+          flex: 0 1 33.333%;
+  margin: 0px 0px 20px 0px;
+  padding: 0px 10px;
+}
+
+.gulp-instr .gallery-block__item img {
+  max-width: 100%;
+}
+
+.page {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;

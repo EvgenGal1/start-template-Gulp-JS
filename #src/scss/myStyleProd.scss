@@ -1,16 +1,38 @@
-// Общие =======================================================================================
+// <myStyleProd(Мои Стили Проекта)>˅=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=˅
+// <Общие(для всех)>˅=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=˅
 body {
   font-size: 20px;
   line-height: 150%;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   background-color: #333;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #fff;
+  &._lock {
+    overflow: hidden;
+  }
 }
 .page {
   padding: 30px;
+  // flex: 1 1 auto;
+  // padding: 100px 30px 30px 30px;
+  // display: flex;
+  // // .page__side
+  // &__side {
+  //   flex: 0 0 300px;
+  //   padding: 0px 20px 0px 0px;
+  // }
+  // // .page__item
+  // &__item {
+  // }
+  // // .page__body
+  // &__body {
+  //   flex: 1 1 auto;
+  //   min-width: 0;
+  // }
 }
-// Gulp Настр. =======================================================================================
-// откл. на время Gulp Инстр.
+//</Общие(для всех)>˄=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=˄
+
+// <Gulp Настр.(видео stFOy0Noahg)>˅=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=˅
+// откл. на время Gulp Инстр. ----------------------------------------------------------------------------------
 .gulp-sett {
   display: none;
   .qwe {
@@ -22,7 +44,9 @@ body {
     }
   }
 }
-// Gulp Инстр. =======================================================================================
+//</Gulp Настр.(видео stFOy0Noahg)>˄=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=˄
+
+// <Gulp Инстр.(видео l517RX8lFRI)>˅=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=˅
 .gulp-instr {
   h3 {
     text-align: center;
@@ -31,7 +55,8 @@ body {
   .block-item {
     margin: 0px 0px 30px 0px;
   }
-  // ТАБ
+
+  // ТАБ =======================================================================================
   .tabs-block {
     &__nav {
       display: flex;
@@ -53,28 +78,38 @@ body {
         background-color: $col-T-primary;
       }
     }
-    // &__body {
-    // }
+    &__body {
+      padding: 20px 0px 0px 0px;
+    }
     // &__block {
     // }
   }
 
-  // СПОЛЕР
+  // СПОЛЕР =======================================================================================
   .spollers-block {
+    // margin: 0px 0px 50px 0px;
+    // растояние м/у сполерами
     &__item {
+      margin: 0px 0px 20px 0px;
+      &:last-child {
+        margin: 0px 0px 0px 0px;
+      }
     }
     &__title {
+      position: relative;
       background-color: #794f45;
       background-color: $col-T-danger;
       cursor: pointer;
       padding: 20px;
-      position: relative;
+      // от наезда на стрелку при длинном тексте
+      padding: 20px 70px 20px 20px;
       // стрелочка
       &::before {
         content: "";
         width: 20px;
         background-color: #fff;
         height: 2px;
+        transition: transform 0.3s ease 0s;
         transform: translate(0, -50%) rotate(-45deg);
         position: absolute;
         right: 15px;
@@ -85,15 +120,95 @@ body {
         width: 20px;
         background-color: #fff;
         height: 2px;
+        transition: transform 0.3s ease 0s;
         transform: translate(0, -50%) rotate(45deg);
         position: absolute;
         right: 29px;
         top: 50%;
       }
+      // изиенение стрелки по откр
+      &._active {
+        &::before {
+          transform: translate(0, -50%) rotate(45deg);
+        }
+        &::after {
+          transform: translate(0, -50%) rotate(-45deg);
+        }
+      }
     }
     &__body {
+      // изначально скрываем
+      display: none;
       // отступ делать только padding
       padding: 20px 0px 0px 0px;
     }
   }
+
+  // ФОРМЫ =======================================================================================
+  .form {
+    margin: 0px 0px 50px 0px;
+    // .form__line
+    &__line {
+      margin: 0px 0px 20px 0px;
+    }
+    // .form__label
+    &__label {
+      display: inline-block;
+      margin: 0px 0px 15px 0px;
+    }
+  }
+
+  // СЛАЙДЕР =======================================================================================
+  .slider {
+    margin: 0px 0px 50px 0px;
+  }
+
+  //========================================================================================================================================================
+  .text {
+    transform: translate(0px, 100px);
+    opacity: 0;
+    transition: all 0.3s ease 0s;
+    margin: 0px 0px 50px 0px;
+    a {
+      color: red;
+    }
+    &._active {
+      transform: translate(0px, 0px);
+      opacity: 1;
+    }
+  }
+
+  //========================================================================================================================================================
+
+  .price {
+    // .price__range
+    &__range {
+    }
+    // .price__inputs
+    &__inputs {
+      display: flex;
+      input {
+        margin: 0px 10px 0px 0px;
+      }
+    }
+  }
+
+  //========================================================================================================================================================
+  .gallery-block {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px -10px;
+    // .gallery-block__item
+    &__item {
+      flex: 0 1 33.333%;
+      margin: 0px 0px 20px 0px;
+      padding: 0px 10px;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
 }
+//</Gulp Инстр.(видео l517RX8lFRI)>˄=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=˄
+
+//</myStyleProd(Мои Стили Проекта)>˄=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=¡=˄

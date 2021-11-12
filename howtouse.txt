@@ -106,6 +106,7 @@ $$ gulp
 Берём папку #src/ (наработки), файлы gulpfile.js (сценарий), package.json (версии пакетов)
 Копир в новый проект, откр в редакторе, откр терминал
 $$ npm i - устан пакетов
+$$ gulp - запаск Gulp
 
 Видео stFOy0Noahg ВСЁ
 
@@ -177,6 +178,8 @@ scss = require('gulp-sass')(require('sass'));
 scss({ outputStyle: 'expanded' }).on('error', scss.logError)
 --------------------------------------
 проблемы с plg WEBPCSS - устан. converter  - $$ npm install webp-converter@2.2.3 --save-dev
+--------------------------------------
+проблемы с Error[ERR_REQUIRE_ESM]:require() of ES Module C:\...\gulp-imagemin\index.js from C:\...\gulpfile.js not supported. - устан. imagemin опред версии -  npm i gulp-imagemin@7.1.0 --save-dev
 --------------------------------------
 WEBP-CSS настр: webpcss({webpClass: '.webp',noWebpClass: '.no-webp'}
 --------------------------------------

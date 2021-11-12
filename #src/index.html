@@ -12,13 +12,13 @@
         <div class="gulp-instr">
           <!-- TAB -->
           <div class="block-item">
+            <h3>Табы (изменения контента в блоке по нажатию на навигацию)</h3>
             <!-- 2 блока(навиг и контент) -->
-            <!-- добав техклас для связи с js и scss -->
-            <!-- _active - один Таб и Контент всегда выделен -->
+            <!-- добав техклас для связи с js и scss(начи _так) -->
             <!-- _tabs - для уникал блока табс(если таб неск) -->
+            <!-- _active - один Таб и Контент всегда выделен -->
             <!-- _tabs-item - на кнп -->
             <!-- _tabs-block - на контент -->
-            <h3>Табы (изменения контента в блоке по нажатию на навигацию)</h3>
             <div class="tabs-block _tabs">
               <!-- навигация(клик) -->
               <nav class="tabs-block__nav">
@@ -48,14 +48,42 @@
           <!-- СПОЛЕР -->
           <div class="block-item">
             <h3>Сполер (выезжающий текст по нажатию на кнопку)</h3>
+            <!-- матрешка. блок -> блок -> titl(клик) + body(скрыт) -->
+            <!-- добав техклас для связи с js и scss(начи _так) -->
+            <!-- _spollers - для уникал блока spoller(если spollerов неск) -->
+            <!-- _spoller - на titl(заголовок) -->
+            <!-- _one - для открытия только одного сполера(аккардион) -->
             <!-- оболочка -->
-            <div class="spollers-block">
+            <!-- Новый код - data-spollers -->
+            <div class="spollers-block _spollers _one">
               <!-- сполер -->
               <div class="spollers-block__item">
                 <!-- заголовок (клик) всегде первый -->
-                <div class="spollers-block__title">Вопрос?</div>
+                <!-- Новый код - data-spollers -->
+                <div class="spollers-block__title _spoller">Вопрос?</div>
                 <!-- контент (скрыт) всегда после -->
-                <div class="spollers-block__body">Ответ! Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus cupiditate sunt consequatur velit dolorum ad!</div>
+                <div class="spollers-block__body">
+                  Ответ! Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Possimus cupiditate sunt consequatur velit dolorum ad!
+                </div>
+              </div>
+              <div class="spollers-block__item">
+                <div data-spoller class="spollers-block__title _spoller">
+                  Вопрос?
+                </div>
+                <div class="spollers-block__body">
+                  Ответ! Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Possimus cupiditate sunt consequatur velit dolorum ad!
+                </div>
+              </div>
+              <div class="spollers-block__item">
+                <div data-spoller class="spollers-block__title _spoller">
+                  Вопрос?
+                </div>
+                <div class="spollers-block__body">
+                  Ответ! Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Possimus cupiditate sunt consequatur velit dolorum ad!
+                </div>
               </div>
             </div>
           </div>
