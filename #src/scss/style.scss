@@ -28,12 +28,12 @@ $fontSize: 16;
 // $minWidth: 320;
 // $md4: 479.98;
 $minWidth: 320px; // мин размер
-$maxWidth: 1920px; // полотно
-$maxWidthContainer: 1170px; // огранич контейнер
-$md1: $maxWidthContainer + 12px; // брейкпоинты для адаптива. сработает когда есть зазор
-$md2: 991.98px;
-$md3: 767.98px;
-$md4: 479.98px;
+$maxWidth: 1920; // полотно
+$maxWidthContainer: 1170; // огранич контейнер
+$md1: $maxWidthContainer + 12; // брейкпоинты для адаптива. сработает когда есть зазор
+$md2: 991.98;
+$md3: 767.98;
+$md4: 479.98;
 
 $mainColor: #000;
 @import "vars"; // переменнные (пока только цвета)
